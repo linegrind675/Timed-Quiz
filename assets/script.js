@@ -133,3 +133,34 @@ function timerStart(duration, display) {
     }, 1000);
 }
 
+startButton.addEventListener('click', startGame);
+startButton.addEventListener("click", function() {
+    var twoMinutes = 60 * 2,
+        display = document.querySelector('#time');
+    timerStart(twoMinutes, display);
+});
+
+function startGame() {
+
+    startButton.classList.add('hide');
+    randomQuestions = questions.sort(() => Math.random() - .5);
+    questionsContainterEl.classList.remove('hide');
+    currentQuestionsIndex = 0;
+    nextQuestion();
+    nextButton.classList.remove('hide')
+}
+
+function showQuestion(questions) {
+    questionElement.innerText = questions.question
+    console.log(questions)
+    queston.answers.forEach(answer => {
+        var button = document.createElement("button")
+        button.innerText = answer.text
+        button.classList.add("btn")
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
+        }
+        button.addEventListener('click', selectAnswer)
+        answerButtonsElement.appendChild(button)
+    })
+}
